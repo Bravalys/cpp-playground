@@ -46,12 +46,42 @@ int main(int argc, char *argv[])
 	//number = argv[1]; // No
 	//should use atoi?
 	// or std::stoi?
-
-	std::cout << argumentAsString << std::endl; // i think this should be removed
+	
+	// Verify if the parameter is a number
+	bool isParamNumber = true;
+	if (argumentAsCharArray[0] == '-') {
+		if(argumentAsString.length() == 1){     // Verify if the argument is only "-"
+			isParamNumber = false;     
+		}
+		else {
+			for (int i = 1; i < argumentAsString.length(); ++i) {
+				if (isdigit(argumentAsString.at(i)) == 0) {       //Verify if the argument is a negative number
+					isParamNumber = false;    
+				}
+			}
+		}
+	}
+	else {
+		for (int i = 0; i < argumentAsString.length(); ++i) {
+			if (isdigit(argumentAsString.at(i)) == 0) {
+				isParamNumber = false;						// Verify if the argument is not a number
+			}
+		}
+	}
+	// If the parameter is not a number print: "NAN" (Not a number) else print "ODD" or "EVEN"
+	if (isParamNumber == false) {
+		std::cout << "NAN" << std::endl;
+	}
+	else {
+		number = std::stoi(argumentAsString);
+		printOddOrEven(number);
+	}
+	
+	// std::cout << argumentAsString << std::endl; // i think this should be removed
+	
 
 	// --------------- stop
 
-	printOddOrEven(number);
 
 	return 0;
 }
