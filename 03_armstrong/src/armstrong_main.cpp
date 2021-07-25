@@ -1,9 +1,22 @@
 #include <iostream>
+#include <string>
 
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
+	int digit, sum = 0;
+	int backup_number = number;
+	while(number != 0){
+		
+		digit = number % 10;
+		sum += pow(digit, 3);
+		number = number / 10;
+		//std::cout << digit << " " << number << std::endl;
+	}
 
+	if (backup_number == sum) {
+		return true;
+	}
 	return false;
 }
 
@@ -12,10 +25,12 @@ void printIsArmstrong(int number)
 	if (isArmstrongNumber(number))
 	{
 		std::cout << "Armstrong" << std::endl;
+
 	}
 	else
 	{
 		std::cout << "NOT Armstrong" << std::endl;
+		// std::cout << number << std::endl;
 	}
 }
 
@@ -50,9 +65,22 @@ int main(int argc, char *argv[])
 	int readNumber = 0;
 	// Get the first argument
 	std::string argumentAsString = argv[1];
+	// Bool to verify if the argument is a digit/number
+	bool isParamNumber = true;
+	for (int i = 0; i < argumentAsString.length(); ++i) {
+		if (isdigit(argumentAsString.at(i)) == 0) {
+			isParamNumber = false;						// Verify if the argument is not a number
+		}
+	}
 	
 	// TODO: read number / cast to integer
-
-	printIsArmstrong(readNumber);
+	if (isParamNumber == false) {
+		std::cout << "Undefined output (do whatever)." << std::endl;
+	}
+	else {
+		readNumber = std::stoi(argumentAsString);
+		printIsArmstrong(readNumber);
+	}
+	// printIsArmstrong(readNumber);
 	return 0;
 }
