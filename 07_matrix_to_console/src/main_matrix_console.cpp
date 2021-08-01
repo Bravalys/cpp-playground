@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
-
+#include <sstream>
 /**
 	Define a simple matrix.
 */
@@ -13,16 +13,27 @@ private:
 
 	// TODO: store the data
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
+
+	char** matrix;
+
 public:
 	Matrix(size_t numColumnsX, size_t numLinesY)
-		// TODO: add functionality
 	{
 		// TODO: add functionality
+		column_count = numColumnsX;
+		line_count = numLinesY;
+		this->matrix = new char* [line_count];
+
+		for (int i = 0; i < line_count; i++) {
+			this->matrix[i] = new char[column_count];
+		}
 	}
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		for (int y = 0; y < this->column_count; y++)
+			this->matrix[line_number][y] = data[y];
 	}
 
 	//OPTIONAL
@@ -55,12 +66,21 @@ public:
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
+		this->matrix[y][x] = cell_content;
 	}
 
 	void print()
 	{
 		// print all lines and columns
 		// TODO: add functionality
+
+		int y, x = 0;
+		for (y = 0; y < line_count; y++)
+		{
+			for (x = 0; x < column_count; x++)
+				std::cout << matrix[y][x];
+			std::cout << std::endl;
+		}
 	}
 };
 
@@ -68,7 +88,7 @@ int main()
 {
 	// Create a matrix with the width of 20 and height of 10.
 	Matrix matrix(20, 10);
-
+	//matrix.print();
 	matrix.setLine(0, "X-----X----X-----XX-");
 	matrix.setLine(1, "--X-----------------");
 	matrix.setLine(2, "-----X--------------");
@@ -95,7 +115,7 @@ X-----X----X-----XX-
 -----------------X--
 */
 	matrix.setCellXY(2, 1, '-');
-	matrix.print();
+	//matrix.print();
 	// Would print
 /*
 X-----X----X-----XX-
@@ -111,7 +131,7 @@ X-----X----X-----XX-
 */
 
 	matrix.setCellXY(3, 7, 'O');
-	matrix.print();
+	//matrix.print();
 /*
 X-----X----X-----XX-
 --------------------
