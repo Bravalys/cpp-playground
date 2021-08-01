@@ -34,3 +34,9 @@
 build/
 bin/
 .vscode/
+.vs/ProjectSettings.json
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/cpp-playground/v16/.suo
+.vs/cpp-playground/v16/Browse.VC.db
+.vs/CMake Overview
